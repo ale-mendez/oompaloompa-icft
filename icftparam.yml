@@ -1,0 +1,93 @@
+#            Input yaml file for oompaloompaicft.py
+#
+#     element     : element name (H, He, Li, Be, ...)
+#     nelec       : number of electrons 
+#     mpot        : type of model potencial (STO, TFDA)
+#     ppot        : whether polarization potencial is used 
+#     alfd        : alpha parameter 
+#     rcut        : rho parameter 
+#     jmax_ex     : maximum value of J for exchange calculation
+#     jmax_nx     : maximum value of J for non exchange calculation
+#     maxc        : maximum number of partial waves
+#     maxe        : maximum scattering energy value
+#     nproc       : number of processor that will be used
+#     eion        : ionization energy (rydbergs)
+#     emax        : maximum value of electron incident energy (rydbergs)
+#     nfine       : number of points used in fine mesh grid
+#     ncoarse     : number of points used in coarse mesh grid
+#     cfgs_spect  : list of configurations in spectroscopic notation
+#     scaling     : whether to use orbital scaling (bool)
+#     pseudo      : whether pseudostates are considered (bool)
+#     psorb       : first pseudoorbital considered 
+#     nshift      : number of spectroscopic terms to be shifted in stg3
+#
+element: 'Be'
+nelec: 4
+mpot: 'STO'
+ppot: True
+alfd:
+    - 1.0
+    - 1.0
+    - 1.0
+rcut:
+    - 1.0
+    - 1.0
+    - 1.0
+jmax_ex: 25
+jmax_nx: 25
+maxc: 80
+maxe: 3
+nproc: 64
+eion: 0.6852058
+emax: 1.911764706
+nfine: 1216
+ncoarse: 256
+cfgs:
+    - '1s2 2s2'
+    - '1s2 2s1 2p1'
+    - '1s2 2p2'
+    - '1s2 2s1 3s1'
+    - '1s2 2s1 3p1'
+    - '1s2 2s1 3d1'
+    - '1s2 2s1 4s1'
+    - '1s2 2s1 4p1'
+    - '1s2 2s1 4d1'
+    - '1s2 2s1 4f1'
+    - '1s2 2s1 5s1'
+    - '1s2 2s1 5p1'
+    - '1s2 2s1 5d1'
+    - '1s2 2s1 5f1'
+    - '1s2 2s1 5g1'
+    - '1s2 2p1 3s1'
+    - '1s2 2p1 3p1'
+    - '1s2 2p1 3d1'
+    - '1s2 2p1 4s1'
+    - '1s2 2p1 4p1'
+    - '1s2 2p1 4d1'
+    - '1s2 2p1 4f1'
+    - '1s2 2p1 5s1'
+    - '1s2 2p1 5p1'
+    - '1s2 2p1 5d1'
+    - '1s2 2p1 5f1'
+    - '1s2 2p1 5g1'
+scaling: True
+lambdas:
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+pseudo: True
+psorb: '5s'
+nshift: 11
+
