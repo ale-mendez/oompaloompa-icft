@@ -212,8 +212,10 @@ def flag_orthogonality(pseudo):
     if pseudo==True: orthog="'LPS'"
     return orthog
 
-def oompaloompa_header():
-    return 'A.S. automatically generated with python script'
+def oompaloompa_header(fname):
+    if fname=='das': flag='A.S.'
+    if fname!='das': flag='S.S.'
+    return flag+' automatically generated with python script'
 
 def namelist_salgeb():
     rad="'NO'"
@@ -302,10 +304,10 @@ def write_MCFMX(file):
 
 def write_das():
     ''' Write AutoStructure input file. '''
-    header=oompaloompa_header()
+    fname='das'
+    header=oompaloompa_header(fname)
     salgeb=namelist_salgeb()
     sminim=namelist_sminim()
-    fname='das'
     with open(fname,'w+') as das:
         das.writelines([header,'\n'])
         das.writelines([salgeb,'\n'])
@@ -439,10 +441,10 @@ def write_dstg1():
          LMAX      : maximum l value for the pseudostates
 
     '''
-    header=oompaloompa_header()
+    fname='dstg1'
+    header=oompaloompa_header(fname)
     stg1A=namelist_STG1A()
     stg1B=namelist_STG1B()
-    fname='dstg1'
     with open(fname,'w+') as dstg1:
         dstg1.writelines([header,'\n'])
         dstg1.writelines([stg1A,'\n'])
@@ -458,7 +460,7 @@ def namelist_STG1A():
     return ' '.join(stg1A)
 
 def namelist_STG1B():
-    maxla=max_angmomentum()
+    maxla=SLP_maxangmomentum()
     maxlt=datainp['jmax_ex']
     maxc=datainp['maxc']
     maxe=datainp['maxe']
@@ -475,8 +477,8 @@ def namelist_STG1B():
     stg1B.append("&END")
     return ' '.join(stg1B)
 
-def max_angmomentum():
-    ''' Gives the maximum angular momentum of the N electron system defined. '''
+def SLP_maxangmomentum():
+    ''' Gives the maximum angular momentum of the SLP configurations yielded. '''
     lq=[i for i in AS['Terms']['L']]
     return max(lq)
 
@@ -499,12 +501,12 @@ def write_dstg2():
          MINST     : minimum value of 2S+1
          MAXST     : maximum value of 2S+1
     '''
-    ncfg=datainp['cfgs']['ncfg']
-    np1cfg=len(datainp['cfgs']['np1_cfgs'])
-    header=oompaloompa_header()
+    fname='dstg2'
+    header=oompaloompa_header(fname)
     stg2A=namelist_STG2A()
     stg2B=namelist_STG2B()
-    fname='dstg2'
+    ncfg=datainp['cfgs']['ncfg']
+    np1cfg=len(datainp['cfgs']['np1_cfgs'])
     with open(fname,'w+') as dstg2:
         dstg2.writelines([header,'\n'])
         dstg2.writelines([stg2A,'\n'])
@@ -574,12 +576,12 @@ def write_dstg3():
         STG3 options:
         
     '''
-    header=oompaloompa_header()
+    fname='dstg3'
+    header=oompaloompa_header(fname)
     prediag=namelist_prediag()
     stg3A=namelist_STG3A()
     stg3B=namelist_STG3B()
     matrixdat=namelist_MATRIXDAT()
-    fname='dstg3'
     with open(fname,'w+') as dstg3:
         dstg3.writelines([header,'\n'])
         dstg3.writelines([prediag,'\n'])
@@ -649,10 +651,10 @@ def write_dstgf(num):
          NOMWRT    : 
 
     '''
-    header=oompaloompa_header()
+    fname='dstgf_'+str(num)
+    header=oompaloompa_header(fname)
     stgf=namelist_stgf()
     mesh=namelist_mesh(num)
-    fname='dstgf_'+str(num)
     with open(fname,'w+') as dstg3:
         dstg3.writelines([header,'\n'])
         dstg3.writelines([stgf,'\n'])
