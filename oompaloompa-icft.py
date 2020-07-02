@@ -412,7 +412,7 @@ def include_NIST(asdf,nistdf):
     enist=[]
     for (i,j) in zip(asdf['Configuration'],asdf['Term']):
         try:
-            ener=nist_terms.loc[(nistdf['Configuration']==i)&(nistdf['Term']==j)]['Level(Ry)'].tolist()[0]
+            ener=nistdf.loc[(nistdf['Configuration']==i)&(nistdf['Term']==j)]['Level(Ry)'].tolist()[0]
         except:
             ener=-999
         enist.append(ener)
@@ -583,7 +583,7 @@ def write_dstg3():
         dstg3.writelines([header,'\n'])
         dstg3.writelines([prediag,'\n'])
         dstg3.writelines([stg3A,'\n'])
-        dstg3.writelines([stg3A,'\n'])
+        dstg3.writelines([stg3B,'\n'])
         dstg3.writelines([matrixdat,'\n'])
         write_shiftenergies(dstg3)
     print('Write '+fname+' OK')
