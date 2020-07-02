@@ -477,7 +477,7 @@ def namelist_STG1B():
 
 def max_angmomentum():
     ''' Gives the maximum angular momentum of the N electron system defined. '''
-    lq=[i[1] for i in datainp['orbs']['qnumbs']]
+    lq=[i for i in AS['Terms']['L']]
     return max(lq)
 
 def write_dstg2():
