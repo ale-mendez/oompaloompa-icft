@@ -235,8 +235,9 @@ def namelist_sminim():
     norb=datainp['orbs']['norb']
     ncfg=datainp['cfgs']['ncfg']
     ppot=datainp['ppot'][0]
-    alfd=datainp['ppot'][1]['alfd']
-    rcut=datainp['ppot'][1]['rcut']
+    if ppot==True:
+        alfd=datainp['ppot'][1]['alfd']
+        rcut=datainp['ppot'][1]['rcut']
     pseudo=datainp['psorbitals']['pseudo']
     orthog=flag_orthogonality(pseudo)
     pprint="'FORM'"
