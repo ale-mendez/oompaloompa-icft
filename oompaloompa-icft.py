@@ -173,7 +173,7 @@ def occ_Np1system(ne_cfgs,qnumbs,ncfg,norb):
             ne=ne_cfgs[i].copy()
             neocc=ne[j]
             np1occ=neocc+1
-            lq=orbs_qnumbs[j][1]
+            lq=qnumbs[j][1]
             iocc=orb_occupancy(lq,np1occ)
             if iocc==True: 
                 ne[j]=np1occ
