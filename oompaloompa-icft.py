@@ -609,7 +609,7 @@ def namelist_STG3B():
 
 def namelist_MATRIXDAT():
     nproc=float(datainp['nproc'])
-    sqrt_proc=np.sqrt(nproc)
+    sqrt_proc=int(np.sqrt(nproc))
     if sqrt_proc**2!=nproc: raise ValueError('The number of processor in input must be square.')
     matrixdat=["&MATRIXDAT","NPROW="+str(sqrt_proc),"NPCOL="+str(sqrt_proc),"&END"]
     return ' '.join(matrixdat)
