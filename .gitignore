@@ -1,7 +1,6 @@
 fortran
 das
-dstg1
-dstg2
+dstg*
 NIST_levels.dat
 NIST_terms.dat
 olg

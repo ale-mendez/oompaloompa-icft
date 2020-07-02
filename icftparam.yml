@@ -12,9 +12,8 @@
 #     maxe        : maximum scattering energy value
 #     nproc       : number of processor that will be used
 #     eion        : ionization energy (rydbergs)
-#     emax        : maximum value of electron incident energy (rydbergs)
-#     nfine       : number of points used in fine mesh grid
-#     ncoarse     : number of points used in coarse mesh grid
+#     grid_pts    : number of points used in mesh grids (several grids can be inputed)
+#     grid_ener   : energy values corresponding to mesh grids (equal elements than grid_pts)
 #     cfgs_spect  : list of configurations in spectroscopic notation
 #     scaling     : whether to use orbital scaling (bool)
 #     pseudo      : whether pseudostates are considered (bool)
@@ -39,9 +38,12 @@ maxc: 80
 maxe: 3
 nproc: 64
 eion: 0.6852058
-emax: 1.911764706
-nfine: 1216
-ncoarse: 256
+grid_pts: 
+    - 1216
+    - 256
+grid_ener:
+    - 0.6852058
+    - 1.911764706
 cfgs:
     - '1s2 2s2'
     - '1s2 2s1 2p1'
