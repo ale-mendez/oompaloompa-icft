@@ -652,7 +652,7 @@ def write_dstgf(num):
 
     '''
     fname='dstgf_'+str(num)
-    header=oompaloompa_header(fname)
+#    header=oompaloompa_header(fname)
     stgf=namelist_stgf()
     mesh=namelist_mesh(num)
     with open(fname,'w+') as dstg3:
