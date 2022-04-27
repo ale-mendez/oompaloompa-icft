@@ -86,7 +86,8 @@ def load_input():
     scaling=data['scaling']
     if scaling==True: 
         lambdas=data['lambdas']
-        if len(lambdas)!=norb: RaiseError('Number of "lambdas" should be equal to the number of orbitals.')
+        if len(lambdas)!=norb: 
+            raise ValueError('Number of "lambdas" should be equal to the number of orbitals.')
     else:
         lambdas=np.zeros(norb)+1
     pseudo=data['pseudo']
@@ -321,7 +322,7 @@ def write_das():
 
 def run_AS():
     try:
-        os.system('~/AS/asdeck25.x < das')
+        os.system('~/autovarlambda/asdeck25.x < das')
         print('AS run OK.')
     except OSError:
         print('Error running AutoStructure... Check das!')
@@ -333,14 +334,20 @@ def load_NIST():
     try:
         terNIST=pd.read_csv('NIST_terms.dat',sep='\s+',skiprows=[0,2])
         change_cfgs_format(terNIST)
+        print('NIST_terms file load OK.')
+    except:
+        print('NIST_terms file not found')
+        terNIST=None
+        
+    try:
         levNIST=pd.read_csv('NIST_levels.dat',sep='\s+',skiprows=[0,2])
         change_cfgs_format(levNIST)
+        print('NIST_level file load OK.')
     except:
-        print('NIST_level or NIST_terms files not found')
+        print('NIST_level file not found')
         levNIST=None
-        terNIST=None
+
     NIST=dict(zip(['Terms','Levels'],[terNIST,levNIST]))
-    print('NIST data load OK.')
     return
 
 def change_cfgs_format(nist_df):
