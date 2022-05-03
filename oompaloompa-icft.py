@@ -18,6 +18,9 @@ def load_input():
       jmax_nx     : maximum value of J for non exchange calculation
       maxc        : maximum number of partial waves
       maxe        : maximum scattering energy value
+      isort       : = 1, the code to consider all N-electron terms of the same SLΠ symmetry together
+                    = 0, one can specify the terms to be included in the CC expansion of the target 
+                         (must be used if energy shift is considered in dstg3)
       nproc       : number of processor that will be used
       eion        : ionization energy (rydbergs)
       grid_pts    : number of points used in mesh grid (several grids can be inputed)
@@ -75,6 +78,7 @@ def load_input():
     jmax_nx=data['jmax_nx']
     maxc=data['maxc']
     maxe=data['maxe']
+    isort=data['isort']
     nproc=data['nproc']
     eion=data['eion']
     grid_pts=data['grid_pts']
@@ -110,10 +114,10 @@ def load_input():
     np1_cfgs=occ_Np1system(ne_cfgs,qnumbs,ncfg,norb)
     cfgs=dict(zip(['spect','ncfg','ne_cfgs','np1_cfgs'],[cfgs_spect,ncfg,ne_cfgs,np1_cfgs]))
     psorbitals=dict(zip(['pseudo','psorb','ipsorb'],[pseudo,psorb,ipsorb]))
-    keys=['element','mpot','ppot','jmax_ex','jmax_nx','maxc','maxe','nproc',
+    keys=['element','mpot','ppot','jmax_ex','jmax_nx','maxc','maxe','isort','nproc',
           'grid_pts','grid_ener','cfgs','orbs',
           'psorbitals','nshift']
-    values=[element,mpot,ppot,jmax_ex,jmax_nx,maxc,maxe,nproc,grid_pts,grid_ener,
+    values=[element,mpot,ppot,jmax_ex,jmax_nx,maxc,maxe,isort,nproc,grid_pts,grid_ener,
             cfgs,orbs,psorbitals,nshift]
     datainp=dict(zip(keys, values))
     print('Input data load OK.')
@@ -533,7 +537,8 @@ def write_dstg2():
 
 def namelist_STG2A():
     nproc=datainp['nproc']
-    stg2A=['&STG2A','ISORT=1','NPROCSTG1='+str(nproc),'&END']
+    isort=datainp['isort']
+    stg2A=['&STG2A','ISORT='+str(isort),'NPROCSTG1='+str(nproc),'&END']
     return ' '.join(stg2A)
 
 def namelist_STG2B():
@@ -606,7 +611,8 @@ def namelist_prediag():
     return ' '.join(prediag)
 
 def namelist_STG3A():
-    stg3A=["&STG3A","ISORT=1","&END"]
+    isort=datainp['isort']
+    stg3A=["&STG3A","ISORT="+str(isort),"&END"]
     return ' '.join(stg3A)
 
 def namelist_STG3B():
